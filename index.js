@@ -9,6 +9,8 @@ client = new Client({ intents:
 ] 
 })
 
+module.exports = client
+
 
 //Evento que ocorre apenas uma vez. 
 //Quando o bot está pronto, executa a função (), que é basicamente o lambda de python, uma função sem nome
