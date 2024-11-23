@@ -21,14 +21,20 @@ function checkAndCreateDB()
     })
 }
 
-function updateJson()
+/**
+ * Adiciona o id do servidor com o valor "todos" ao json e escreve no arquivo
+ */
+function updateJson(guildID, jsonFile)
 {
-    
+    jsonFile[guildID] = "todos"
+
+    const jsonString = JSON.stringify(jsonFile,null,2)
+    fs.writeFileSync('database.json', jsonString)
 }
 
 /**
  * Checa se algum servidor em que o bot está não tem o seu id no database, 
- * caso não esteja, coloca o id no database 
+ * caso não esteja, executa a função updateJson()
  * 
 */
 function defaultConfigs(client)
@@ -41,7 +47,8 @@ function defaultConfigs(client)
 
         if(!(guild.id in jsonFile))
         {
-            console.log(`${guild.name} não tá no json`)
+            updateJson(guild.id,jsonFile)
+            console.log(`${guild.name} adicionado ao database`)
         }
     })
     
@@ -60,4 +67,3 @@ module.exports = {
         defaultConfigs(client)
     }
 }
-
