@@ -7,9 +7,13 @@ const TOKEN = process.env.TOKEN
 client = new Client({ intents: 
 [
     GatewayIntentBits.Guilds, 
-    GatewayIntentBits.GuildMessages
+    GatewayIntentBits.GuildMessages,
+	GatewayIntentBits.MessageContent,
+	GatewayIntentBits.GuildVoiceStates
 ] 
 })
+
+module.exports = client
 
 const eventsPath = path.join(__dirname, 'events')
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'))
